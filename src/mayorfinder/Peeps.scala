@@ -8,7 +8,7 @@ object Peeps {
    */
   def findMayor[P >: Null](knows: (P,P) => Boolean, peeps: List[P]): Option[P] = {
     if (peeps.nonEmpty) {
-      def known(a:P, b:P) = if (knows(a,b)) b else if (knows(b,a)) a else null
+      def known(a:P, b:P) = if (knows(b,a)) a else if (knows(a,b)) b else null
       val mayor = peeps.reduceLeft(known)
       if (mayor != null && !peeps.exists(knows(mayor, _)))
         return Some(mayor)
